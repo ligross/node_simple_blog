@@ -10,7 +10,8 @@ var UserSchema = new Schema({
     email:      { type: String, required: true, index: { unique: true } },
     created_at: { type: Date,    default: Date.now },
     admin:      { type: Boolean,    default: false },
-    vkontakteId: { type: String, index: true }
+    vkontakteId: { type: String, index: true },
+    githubId: { type: String, index: true }
 });
 
 UserSchema.plugin(findOrCreate);

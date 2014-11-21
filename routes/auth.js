@@ -87,5 +87,18 @@ module.exports = function (passport) {
             res.redirect('/');
         });
 
+    router.get('/auth/github', passport.authenticate('github'),
+        function (req, res) {
+            // The request will be redirected to GitHub for authentication, so this
+            // function will not be called.
+        }
+    );
+
+    router.get('/auth/github/callback',
+        passport.authenticate('github', {failureRedirect: '/login'}),
+        function (req, res) {
+            res.redirect('/');
+        });
+
     return router;
 };
