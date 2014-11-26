@@ -100,5 +100,46 @@ module.exports = function (passport) {
             res.redirect('/');
         });
 
+    router.get('/connect/github',
+        passport.authorize('github-authz', {failureRedirect: '/profile'})
+    );
+
+    router.get('/connect/github/callback',
+        passport.authorize('github-authz', {failureRedirect: '/profile'}),
+        function (req, res) {
+            var user = req.user;
+            var account = req.account;
+
+            user.github.id = account.github.id;
+            user.github.username = account.github.username;
+            user.save(function (err) {
+                if (err) {
+                    return console.log(err);
+                }
+                return res.redirect('/profile');
+            });
+        }
+    );
+
+    router.get('/connect/vk',
+        passport.authorize('vk-authz', {failureRedirect: '/profile'})
+    );
+
+    router.get('/connect/vk/callback',
+        passport.authorize('vk-authz', {failureRedirect: '/profile'}),
+        function (req, res) {
+            var user = req.user;
+            var account = req.account;
+            user.vkontakte.id = account.vkontakte.id;
+            user.vkontakte.displayName = account.vkontakte.displayName;
+            user.save(function (err) {
+                if (err) {
+                    return console.log(err);
+                }
+                return res.redirect('/profile');
+            });
+        }
+    );
+
     return router;
 };

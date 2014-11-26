@@ -1,0 +1,22 @@
+extends layout
+
+block content
+   .col-md-4.col-md-offset-4
+      .login-panel.panel.panel-default
+         .panel-body
+            .panel-body
+               h3 VK account
+               if user.vkontakte.id
+                  p Vkontakte ID: #{user.vkontakte.id}
+                  p Vkontakte displayName: #{user.vkontakte.displayName}
+                  a.btn.btn-lg.btn-primary.btn-block(href='/disconnect/vk') Unlink VK account
+               else
+                  a.btn.btn-lg.btn-primary.btn-block(href='/connect/vk') Link VK account
+            .panel-body
+               h3 Githib account
+                  if user.github.id
+                     p Github ID: #{user.github.id}
+                     p Github username: #{user.github.username}
+                     a.btn.btn-lg.btn-primary.btn-block(href='/disconnect/github') Unlink Github account
+                  else
+                     a.btn.btn-lg.btn-primary.btn-block(href='/connect/github') Link Github account

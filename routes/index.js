@@ -28,6 +28,13 @@ router.get('/new', function (req, res) {
     });
 });
 
+router.get('/profile', function (req, res) {
+    res.render('profile', {
+        title: 'Profile',
+        user: req.user
+    });
+});
+
 router.post('/new', function (req, res) {
     (new Post({
         title:  req.body.title,
